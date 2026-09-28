@@ -59,6 +59,8 @@ for i in range(len(lcname)):
          max_index_err = np.argmax(power)
          pmax_err[j] = period[max_index_err]
      #calcolo della deviazione standard per tutte le curve di luce
+     #l'errore associato al periodo è dato dalla deviazione standard dei periodi calcolati da dati
+     #ricampionati Ncicli volte con ricampionamento per reinserimento random
      sigma = np.std(pmax_err)
      sigma_day = sigma/24
 

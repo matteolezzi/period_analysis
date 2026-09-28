@@ -35,6 +35,7 @@ def FoldLightCurve2(time, flux, error, period, nbins=10, t0=0):
     for ibin in range(nbins):
         phase_bin = deltaphase * ibin
         phase[ibin] = phase_bin
+        #trova gli indici dei punti la cui fase cade in quel bin
         index = np.where((sorted_phases >= phase_bin) & (sorted_phases < phase_bin + deltaphase))
         if len(index[0]) > 0:
             profile[ibin] = np.mean(sorted_flux[index])
@@ -76,6 +77,7 @@ for i in range(len(lcname)):
     # si ricampionano i dati originali con reinserimento e si ricalcola il periodo
     pmax_err = np.empty(Ncicli)
     for j in range(Ncicli):
+        #sceglie tra [0,..., N -1 ] e ne prende N
         idx = np.random.choice(len(time), size=len(time), replace=True)
         frequency, power = LombScargle(time[idx], mag[idx]).autopower(minimum_frequency=1 / pmax[i],
                                                                       maximum_frequency=1 / pmin,
